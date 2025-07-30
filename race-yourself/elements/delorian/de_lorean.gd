@@ -11,7 +11,7 @@ extends CharacterBody2D
 @export var traction_fast = 2.5  # Traction factor when the car is moving fast (affects control)
 @export var traction_slow = 10  # Traction factor when the car is moving slow (affects control)
 
-var wheel_base = 65  # Distance between the front and back axle of the car
+var wheel_base = 14  # Distance between the front and back axle of the car
 var acceleration = Vector2.ZERO  # Current acceleration vector
 var steer_direction  # Current direction of steering
 

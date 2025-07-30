@@ -1291,4 +1291,3 @@ tile_map_data = PackedByteArray("AAADAAIAAAAHAAAAAAADAAEAAAAAAAAAAAADAAAAAAATAAI
 tile_set = SubResource("TileSet_fc0e3")
 
 [node name="DeLorean" parent="." instance=ExtResource("1_80nbo")]
-engine_power = 300

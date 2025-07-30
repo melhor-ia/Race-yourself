@@ -5,25 +5,24 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2pjhi"]
 atlas = ExtResource("2_jxhqk")
-region = Rect2(704, 19, 16, 13)
+region = Rect2(739, 17, 10, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
 size = Vector2(64, 52)
 
 [node name="DeLorean" type="CharacterBody2D"]
 script = ExtResource("1_jxhqk")
+steering_angle = 5
+engine_power = 300
+traction_fast = 3.5
 is_active = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(12, 1)
+position = Vector2(0, 1)
+rotation = -1.5708
 scale = Vector2(4, 4)
 texture = SubResource("AtlasTexture_2pjhi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(12, 1)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_fc0e3")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(70, 0)
-zoom = Vector2(0.75, 0.75)
-position_smoothing_speed = 10.0
