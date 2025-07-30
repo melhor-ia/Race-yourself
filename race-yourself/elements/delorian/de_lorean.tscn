@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://li3xwo4ws2fo"]
+[gd_scene load_steps=6 format=3 uid="uid://li3xwo4ws2fo"]
 
 [ext_resource type="Script" uid="uid://b3l765sw1qiux" path="res://elements/delorian/de_lorean.gd" id="1_jxhqk"]
+[ext_resource type="Material" uid="uid://c48rld4sigxy1" path="res://elements/delorian/particles.tres" id="2_2pjhi"]
 [ext_resource type="Texture2D" uid="uid://4ol3e3s0f7nh" path="res://assets/colored_packed.png" id="2_jxhqk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2pjhi"]
@@ -12,8 +13,19 @@ size = Vector2(64, 52)
 
 [node name="DeLorean" type="CharacterBody2D"]
 script = ExtResource("1_jxhqk")
+slip_speed = 600
 traction_fast = 5.0
 is_active = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-15, -13)
+amount = 3000
+process_material = ExtResource("2_2pjhi")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(-15, 13)
+amount = 3000
+process_material = ExtResource("2_2pjhi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(10, 1)

@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://cocthpek3s5dk"]
+[gd_scene load_steps=6 format=4 uid="uid://cocthpek3s5dk"]
 
 [ext_resource type="PackedScene" uid="uid://li3xwo4ws2fo" path="res://elements/delorian/de_lorean.tscn" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://4ol3e3s0f7nh" path="res://assets/colored_packed.png" id="2_e2o6t"]
-[ext_resource type="Script" uid="uid://b2f8xs7nb6yjk" path="res://elements/camera_body/camera_body.gd" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://b2xui18qto4xn" path="res://elements/camera_2d.tscn" id="3_feb5d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_feb5d"]
 texture = ExtResource("2_e2o6t")
@@ -1284,9 +1284,6 @@ terrain_set_1/terrain_0/name = "Blank"
 terrain_set_1/terrain_0/color = Color(0.24744, 0.171072, 1, 1)
 sources/0 = SubResource("TileSetAtlasSource_feb5d")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_e2o6t"]
-radius = 41.0122
-
 [node name="Game" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -1295,34 +1292,8 @@ tile_map_data = PackedByteArray("AAADAAIAAAAHAAAAAAADAAEAAAAAAAAAAAADAAAAAAATAAI
 tile_set = SubResource("TileSet_fc0e3")
 
 [node name="DeLorean" parent="." instance=ExtResource("1_80nbo")]
+position = Vector2(-785, -593)
+engine_power = 250
 
-[node name="Marker2D" type="Marker2D" parent="DeLorean"]
-position = Vector2(273, 0)
-
-[node name="CameraBody" type="CharacterBody2D" parent="." node_paths=PackedStringArray("tracker")]
-position = Vector2(275, 0)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("3_feb5d")
-tracker = NodePath("../DeLorean/Marker2D")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBody"]
-shape = SubResource("CircleShape2D_e2o6t")
-
-[node name="Camera2D" type="Camera2D" parent="CameraBody"]
-zoom = Vector2(0.85, 0.85)
-process_callback = 0
-limit_left = -1475
-limit_top = -2205
-limit_right = 1820
-limit_bottom = 420
-position_smoothing_enabled = true
-position_smoothing_speed = 3.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.1
-drag_top_margin = 0.1
-drag_right_margin = 0.1
-drag_bottom_margin = 0.1
-editor_draw_limits = true
-editor_draw_drag_margin = true
+[node name="Camera2D" parent="DeLorean" instance=ExtResource("3_feb5d")]
+position = Vector2(427, 0)

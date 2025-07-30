@@ -19,12 +19,12 @@ var steer_direction  # Current direction of steering
 
 func _physics_process(delta: float) -> void:
 	if is_active:
-		#$Camera2D.enabled = true
+		$Camera2D.enabled = true
 		acceleration = Vector2.ZERO
 		get_input()  # Take input from player
 		calculate_steering(delta)  # Apply turning logic based on steering
-	#else:
-		#$Camera2D.enabled = false
+	else:
+		$Camera2D.enabled = false
 
 	velocity += acceleration * delta  # Apply the resulting acceleration to the velocity
 	apply_friction(delta)  # Apply friction forces to the car
@@ -72,6 +72,17 @@ func calculate_steering(delta):
 	var traction = traction_slow
 	if velocity.length() > slip_speed:
 		traction = traction_fast
+		if steer_direction  != 0:
+			$GPUParticles2D.rotation = steer_direction
+			$GPUParticles2D.emitting = true
+			$GPUParticles2D2.rotation = steer_direction
+			$GPUParticles2D2.emitting = true
+		else:
+			$GPUParticles2D.emitting = false
+			$GPUParticles2D2.emitting = false
+	else:
+		$GPUParticles2D.emitting = false
+		$GPUParticles2D2.emitting = false
 
 	# Dot product represents how aligned the new heading is with the current velocity direction
 	var d = new_heading.dot(velocity.normalized())
