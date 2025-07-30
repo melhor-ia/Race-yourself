@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://li3xwo4ws2fo"]
+
+[ext_resource type="Script" uid="uid://b3l765sw1qiux" path="res://elements/delorian/de_lorean.gd" id="1_jxhqk"]
+[ext_resource type="Texture2D" uid="uid://dfnvni40kllwo" path="res://icon.svg" id="2_2pjhi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
+size = Vector2(128, 128)
+
+[node name="DeLorean" type="CharacterBody2D"]
+script = ExtResource("1_jxhqk")
+friction = -100
+is_active = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(27, 0)
+texture = ExtResource("2_2pjhi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(27, 0)
+shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="Camera2D" type="Camera2D" parent="."]

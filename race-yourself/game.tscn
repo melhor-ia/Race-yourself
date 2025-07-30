@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cocthpek3s5dk"]
+
+[ext_resource type="PackedScene" uid="uid://li3xwo4ws2fo" path="res://elements/delorian/de_lorean.tscn" id="1_80nbo"]
+
+[node name="Game" type="Node2D"]
+
+[node name="DeLorean" parent="." instance=ExtResource("1_80nbo")]
