@@ -12,17 +12,15 @@ size = Vector2(64, 52)
 
 [node name="DeLorean" type="CharacterBody2D"]
 script = ExtResource("1_jxhqk")
-steering_angle = 5
-engine_power = 300
-traction_fast = 3.5
+traction_fast = 5.0
 is_active = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(10, 1)
 rotation = -1.5708
 scale = Vector2(4, 4)
 texture = SubResource("AtlasTexture_2pjhi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(10, 1)
 shape = SubResource("RectangleShape2D_fc0e3")

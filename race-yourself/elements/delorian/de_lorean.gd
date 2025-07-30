@@ -2,7 +2,7 @@ class_name DeLorian
 extends CharacterBody2D
 
 @export var steering_angle = 15  # Maximum angle for steering the car's wheels
-@export var engine_power = 900  # How much force the engine can apply for acceleration
+@export var engine_power = 300  # How much force the engine can apply for acceleration
 @export var friction = -250  # The friction coefficient that slows down the car
 @export var drag = -0.06  # Air drag coefficient that also slows down the car
 @export var braking = -450  # Braking power when the brake input is applied
@@ -11,7 +11,7 @@ extends CharacterBody2D
 @export var traction_fast = 2.5  # Traction factor when the car is moving fast (affects control)
 @export var traction_slow = 10  # Traction factor when the car is moving slow (affects control)
 
-var wheel_base = 14  # Distance between the front and back axle of the car
+var wheel_base = 14*4  # Distance between the front and back axle of the car
 var acceleration = Vector2.ZERO  # Current acceleration vector
 var steer_direction  # Current direction of steering
 
