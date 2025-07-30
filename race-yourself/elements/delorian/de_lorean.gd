@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var steering_angle = 15  # Maximum angle for steering the car's wheels
 @export var engine_power = 900  # How much force the engine can apply for acceleration
-@export var friction = -55  # The friction coefficient that slows down the car
+@export var friction = -250  # The friction coefficient that slows down the car
 @export var drag = -0.06  # Air drag coefficient that also slows down the car
 @export var braking = -450  # Braking power when the brake input is applied
 @export var max_speed_reverse = 250  # Maximum speed limit in reverse
