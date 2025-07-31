@@ -12,6 +12,10 @@ func _on_area_2d_lap_over() -> void:
 	print("LAP")
 	if state == State.IDLE:
 		state = State.COUNTING
+		$Marker2D.global_position = player.global_position
+		for particle in $Marker2D.get_children():
+			if particle is GPUParticles2D:
+				particle.emitting = true
 		$Timer.start()
 	else:
 		state = State.PLAYING
