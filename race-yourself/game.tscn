@@ -1342,7 +1342,7 @@ tile_map_data = PackedByteArray("AAADAAIAAAAHAAAAAAADAAEAAAAAAAAAAAADAAAAAAATAAI
 tile_set = SubResource("TileSet_fc0e3")
 
 [node name="DeLorean" parent="." instance=ExtResource("1_80nbo")]
-position = Vector2(-785, -593)
+position = Vector2(-6, -182)
 engine_power = 250
 
 [node name="Camera2D" parent="DeLorean" instance=ExtResource("3_feb5d")]

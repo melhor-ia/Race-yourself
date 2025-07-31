@@ -1,10 +1,51 @@
-[gd_scene load_steps=3 format=3 uid="uid://c05jwaefw28f7"]
+[gd_scene load_steps=9 format=3 uid="uid://c05jwaefw28f7"]
 
 [ext_resource type="Script" uid="uid://ccfmqinpg621q" path="res://elements/ghost/ghost.gd" id="1_b48kj"]
-[ext_resource type="Texture2D" uid="uid://dfnvni40kllwo" path="res://icon.svg" id="1_ql7f8"]
+[ext_resource type="PackedScene" uid="uid://rias608g3jdo" path="res://elements/stacked_spites.tscn" id="2_b48kj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b48kj"]
+size = Vector2(68, 36)
+
+[sub_resource type="Gradient" id="Gradient_b48kj"]
+offsets = PackedFloat32Array(0, 0.554545)
+colors = PackedColorArray(0.31982, 0.527251, 1, 1, 1, 1, 0.686275, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ybbtj"]
+gradient = SubResource("Gradient_b48kj")
+
+[sub_resource type="Curve" id="Curve_gq8fl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ldkjm"]
+curve = SubResource("Curve_gq8fl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r3jn5"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(45, 25, 1)
+direction = Vector3(0, -1, 0)
+spread = 14.639
+initial_velocity_max = 230.77
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_ldkjm")
+color_ramp = SubResource("GradientTexture1D_ybbtj")
 
 [node name="PathFollow2D" type="PathFollow2D"]
 script = ExtResource("1_b48kj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_ql7f8")
+[node name="StaticBody2D" type="CharacterBody2D" parent="."]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_b48kj")
+
+[node name="StackedSpites" parent="StaticBody2D" instance=ExtResource("2_b48kj")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="StaticBody2D"]
+amount = 200
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_r3jn5")

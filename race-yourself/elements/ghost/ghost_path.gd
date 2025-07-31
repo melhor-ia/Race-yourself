@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 			var distance = ghost.global_position.distance_to(curve.get_point_position(ghost.point))
 			var distance_points = curve.get_point_position(ghost.point-1).distance_to(curve.get_point_position(ghost.point))
 			print(distance)
-			if distance > 5:
+			if distance > 1:
 				ghost.progress += distance_points*delta*10
 			else:
 				ghost.point += 1
