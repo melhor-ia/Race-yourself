@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c05jwaefw28f7"]
+
+[ext_resource type="Script" uid="uid://ccfmqinpg621q" path="res://elements/ghost/ghost.gd" id="1_b48kj"]
+[ext_resource type="Texture2D" uid="uid://dfnvni40kllwo" path="res://icon.svg" id="1_ql7f8"]
+
+[node name="PathFollow2D" type="PathFollow2D"]
+script = ExtResource("1_b48kj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ql7f8")
