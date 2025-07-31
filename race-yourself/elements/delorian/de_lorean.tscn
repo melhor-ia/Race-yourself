@@ -2,11 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b3l765sw1qiux" path="res://elements/delorian/de_lorean.gd" id="1_jxhqk"]
 [ext_resource type="Material" uid="uid://c48rld4sigxy1" path="res://elements/delorian/particles.tres" id="2_2pjhi"]
-[ext_resource type="Texture2D" uid="uid://4ol3e3s0f7nh" path="res://assets/colored_packed.png" id="2_jxhqk"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2pjhi"]
-atlas = ExtResource("2_jxhqk")
-region = Rect2(739, 17, 10, 14)
+[ext_resource type="Texture2D" uid="uid://wi3kddxugmku" path="res://assets/Madmaxstylecar.png" id="3_2pjhi"]
+[ext_resource type="Script" uid="uid://dqcq52sxui6ms" path="res://elements/delorian/stacked_sprite.gd" id="4_ijyud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
 size = Vector2(64, 52)
@@ -18,20 +15,23 @@ traction_fast = 5.0
 is_active = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(-15, -13)
+position = Vector2(-11, -14)
 amount = 3000
 process_material = ExtResource("2_2pjhi")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
-position = Vector2(-15, 13)
+position = Vector2(-11, 14)
 amount = 3000
 process_material = ExtResource("2_2pjhi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(10, 1)
-rotation = -1.5708
-scale = Vector2(4, 4)
-texture = SubResource("AtlasTexture_2pjhi")
+position = Vector2(10, 0)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_2pjhi")
+hframes = 12
+script = ExtResource("4_ijyud")
+
+[node name="reverse_rotation" type="Marker2D" parent="Sprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(10, 1)

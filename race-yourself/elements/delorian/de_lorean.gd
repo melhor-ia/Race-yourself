@@ -10,12 +10,12 @@ extends CharacterBody2D
 @export var slip_speed = 400  # Speed above which the car's traction decreases (for drifting)
 @export var traction_fast = 2.5  # Traction factor when the car is moving fast (affects control)
 @export var traction_slow = 10  # Traction factor when the car is moving slow (affects control)
+@export var is_active = false
 
 var wheel_base = 14*4  # Distance between the front and back axle of the car
 var acceleration = Vector2.ZERO  # Current acceleration vector
 var steer_direction  # Current direction of steering
 
-@export var is_active = false
 
 func _physics_process(delta: float) -> void:
 	if is_active:
