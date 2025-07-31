@@ -20,7 +20,7 @@ enum State{IDLE,ACTIVE}
 
 var wheels_distance := 36*2
 var acceleration := Vector2.ZERO
-var steer_direction:float
+var steer_direction:float = 0
 
 
 func _physics_process(delta: float) -> void:
@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func get_input():
+func get_input() -> void:
 	var turn:float = Input.get_axis("move_left", "move_right")
 	steer_direction = turn * deg_to_rad(steering_max_angle)
 
@@ -44,7 +44,7 @@ func get_input():
 		acceleration = transform.x * braking
 
 
-func apply_friction(delta):
+func apply_friction(delta) -> void:
 	if acceleration == Vector2.ZERO and velocity.length() < 50:
 		velocity = Vector2.ZERO
 	
@@ -53,7 +53,7 @@ func apply_friction(delta):
 	acceleration += drag_force + friction_force
 
 
-func calculate_steering(delta):
+func calculate_steering(delta) -> void:
 	var rear_wheel = position - transform.x * wheels_distance / 2.0
 	var front_wheel = position + transform.x * wheels_distance / 2.0
 	# Advance the wheels' positions based on the current velocity, applying rotation to the front wheel
@@ -63,6 +63,15 @@ func calculate_steering(delta):
 	var new_heading = rear_wheel.direction_to(front_wheel)
 
 	var traction = traction_fast if velocity.length() > speed_to_slip else traction_slow
+
+
+	print(steer_direction==0.0)
+	if steer_direction == 0 or traction == traction_slow:
+		for particle in drift_particles:
+			particle.emitting = false
+	else:
+		for particle in drift_particles:
+			particle.emitting = true
 	
 	var d = new_heading.dot(velocity.normalized())
 	if d > 0:
@@ -70,10 +79,4 @@ func calculate_steering(delta):
 	if d < 0:
 		velocity = -new_heading * min(velocity.length(), max_speed_reverse)
 	rotation = new_heading.angle()
-
-	if steer_direction != 0:
-		for particle in drift_particles:
-			particle.emitting = true
-	else:
-		for particle in drift_particles:
-				particle.emitting = false
+	

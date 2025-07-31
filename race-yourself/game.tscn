@@ -1,12 +1,11 @@
-[gd_scene load_steps=20 format=4 uid="uid://cocthpek3s5dk"]
+[gd_scene load_steps=19 format=4 uid="uid://cocthpek3s5dk"]
 
 [ext_resource type="PackedScene" uid="uid://li3xwo4ws2fo" path="res://elements/delorian/de_lorean.tscn" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://4ol3e3s0f7nh" path="res://assets/colored_packed.png" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://b2xui18qto4xn" path="res://elements/camera_2d.tscn" id="3_feb5d"]
-[ext_resource type="Script" uid="uid://bub2h5hxgslix" path="res://elements/finish_line/finish_line.gd" id="4_fc0e3"]
+[ext_resource type="Script" uid="uid://bub2h5hxgslix" path="res://elements/track/finish_line/finish_line.gd" id="4_fc0e3"]
 [ext_resource type="Script" uid="uid://b6tsbnok05d1m" path="res://elements/ghost/ghost_path.gd" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://c05jwaefw28f7" path="res://elements/ghost/ghost.tscn" id="6_ryrav"]
-[ext_resource type="PackedScene" uid="uid://e3fjg23gv1b7" path="res://elements/fire_particles.tscn" id="7_eow3j"]
+[ext_resource type="PackedScene" uid="uid://e3fjg23gv1b7" path="res://elements/track/fire_particles.tscn" id="7_eow3j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_feb5d"]
 texture = ExtResource("2_e2o6t")
@@ -1370,10 +1369,9 @@ tile_map_data = PackedByteArray("AAADAAIAAAAHAAAAAAADAAEAAAAAAAAAAAADAAAAAAATAAI
 tile_set = SubResource("TileSet_fc0e3")
 
 [node name="DeLorean" parent="." instance=ExtResource("1_80nbo")]
-position = Vector2(-6, -182)
-
-[node name="Camera2D" parent="DeLorean" instance=ExtResource("3_feb5d")]
-position = Vector2(427, 0)
+position = Vector2(-312, -221)
+speed_to_slip = 500
+traction_fast = 4
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(298, -144)
@@ -1396,26 +1394,26 @@ libraries = {
 &"": SubResource("AnimationLibrary_eow3j")
 }
 
-[node name="Path2D" type="Path2D" parent="." node_paths=PackedStringArray("player")]
+[node name="Track" type="Path2D" parent="." node_paths=PackedStringArray("player")]
 curve = SubResource("Curve2D_ryrav")
 script = ExtResource("5_7jktm")
 player = NodePath("../DeLorean")
 ghost_scene = ExtResource("6_ryrav")
 
-[node name="Timer" type="Timer" parent="Path2D"]
+[node name="TrackTimer" type="Timer" parent="Track"]
 process_callback = 0
 wait_time = 0.1
 
-[node name="Marker2D" type="Marker2D" parent="Path2D"]
+[node name="Spawnpoint" type="Marker2D" parent="Track"]
 
-[node name="GPUParticles2D2" parent="Path2D/Marker2D" instance=ExtResource("7_eow3j")]
+[node name="GPUParticles2D2" parent="Track/Spawnpoint" instance=ExtResource("7_eow3j")]
 position = Vector2(-5, -15)
 amount = 200
 lifetime = 0.5
 one_shot = false
 process_material = SubResource("ParticleProcessMaterial_j5wjh")
 
-[node name="GPUParticles2D3" parent="Path2D/Marker2D" instance=ExtResource("7_eow3j")]
+[node name="GPUParticles2D3" parent="Track/Spawnpoint" instance=ExtResource("7_eow3j")]
 position = Vector2(-5, 16)
 amount = 200
 lifetime = 0.5
@@ -1423,5 +1421,5 @@ one_shot = false
 process_material = SubResource("ParticleProcessMaterial_j5wjh")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
-[connection signal="lap_over" from="Area2D" to="Path2D" method="_on_area_2d_lap_over"]
-[connection signal="timeout" from="Path2D/Timer" to="Path2D" method="_on_timer_timeout"]
+[connection signal="lap_over" from="Area2D" to="Track" method="_on_area_2d_lap_over"]
+[connection signal="timeout" from="Track/TrackTimer" to="Track" method="_on_timer_timeout"]

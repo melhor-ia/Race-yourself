@@ -1,15 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://li3xwo4ws2fo"]
+[gd_scene load_steps=7 format=3 uid="uid://li3xwo4ws2fo"]
 
 [ext_resource type="Script" uid="uid://b3l765sw1qiux" path="res://elements/delorian/de_lorean.gd" id="1_jxhqk"]
 [ext_resource type="Material" uid="uid://c48rld4sigxy1" path="res://elements/delorian/particles.tres" id="2_2pjhi"]
-[ext_resource type="PackedScene" uid="uid://rias608g3jdo" path="res://elements/stacked_spites.tscn" id="3_2pjhi"]
+[ext_resource type="Texture2D" uid="uid://wi3kddxugmku" path="res://assets/Madmaxstylecar.png" id="3_ijyud"]
+[ext_resource type="Script" uid="uid://dqcq52sxui6ms" path="res://components/stacked_sprite.gd" id="4_nkpcg"]
+[ext_resource type="PackedScene" path="res://elements/camera_2d.tscn" id="5_nkpcg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
 size = Vector2(64, 52)
 
-[node name="DeLorean" type="CharacterBody2D"]
+[node name="DeLorean" type="CharacterBody2D" node_paths=PackedStringArray("drift_particles")]
 collision_layer = 4
 script = ExtResource("1_jxhqk")
+drift_particles = [NodePath("GPUParticles2D"), NodePath("GPUParticles2D2")]
 state = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -22,9 +25,15 @@ position = Vector2(-6, 14)
 amount = 3000
 process_material = ExtResource("2_2pjhi")
 
-[node name="StackedSpites" parent="." instance=ExtResource("3_2pjhi")]
+[node name="StackedSpites" type="Sprite2D" parent="."]
 position = Vector2(15, 0)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_ijyud")
+hframes = 12
+script = ExtResource("4_nkpcg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(15, 1)
 shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="Camera2D" parent="." instance=ExtResource("5_nkpcg")]
